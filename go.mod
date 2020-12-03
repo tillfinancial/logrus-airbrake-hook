@@ -1,4 +1,4 @@
-module github.com/tillfinancial/logrus-airbrake-hooks
+module github.com/tillfinancial/logrus-airbrake-hook
 
 go 1.15
 
