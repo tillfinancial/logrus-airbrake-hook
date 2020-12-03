@@ -10,6 +10,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+const revisionEnvKey = "GIT_COMMIT_LONG"
+
 // default levels to be fired when logging on
 var defaultLevels = []logrus.Level{
 	logrus.ErrorLevel,
@@ -25,7 +27,17 @@ type airbrakeHook struct {
 }
 
 func NewHook(projectID int64, apiKey, env string) *airbrakeHook {
-	airbrake := gobrake.NewNotifier(projectID, apiKey)
+	options := gobrake.NotifierOptions{
+		ProjectId:  projectID,
+		ProjectKey: apiKey,
+	}
+	revision, ok := os.LookupEnv(revisionEnvKey)
+	if ok {
+		options.Revision = revision
+	}
+
+	airbrake := gobrake.NewNotifierWithOptions(&options)
+
 	airbrake.AddFilter(func(notice *gobrake.Notice) *gobrake.Notice {
 		if env == "development" {
 			return nil
