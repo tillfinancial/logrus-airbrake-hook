@@ -1,4 +1,4 @@
-package airbrake // import "gopkg.in/gemnasium/logrus-airbrake-hook.v4"
+package airbrake
 
 import (
 	"errors"
@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/airbrake/gobrake/v4"
+	"github.com/airbrake/gobrake/v5"
 	"github.com/sirupsen/logrus"
 )
 
@@ -57,7 +57,7 @@ func (hook *airbrakeHook) Fire(entry *logrus.Entry) error {
 			break
 		}
 	}
-	notice := hook.Airbrake.Notice(notifyErr, req, 3)
+	notice := hook.Airbrake.Notice(notifyErr, req, 6)
 	for k, v := range entry.Data {
 		notice.Context[k] = fmt.Sprintf("%s", v)
 	}

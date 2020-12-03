@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/airbrake/gobrake/v4"
+	"github.com/airbrake/gobrake/v5"
 	"github.com/sirupsen/logrus"
 )
 
