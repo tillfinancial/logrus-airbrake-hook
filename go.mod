@@ -1,9 +1,8 @@
-module gopkg.in/gemnasium/logrus-airbrake-hook.v4
+module github.com/tillfinancial/logrus-airbrake-hooks
 
-go 1.13
+go 1.15
 
 require (
-	github.com/airbrake/gobrake/v4 v4.0.3
-	github.com/airbrake/gobrake/v5 v5.0.3 // indirect
+	github.com/airbrake/gobrake/v5 v5.0.3
 	github.com/sirupsen/logrus v1.4.2
 )
