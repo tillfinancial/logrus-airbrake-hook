@@ -3,6 +3,7 @@ package airbrake
 import (
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"os"
 
@@ -45,6 +46,11 @@ func NewHook(projectID int64, apiKey, env string) *airbrakeHook {
 		notice.Context["environment"] = env
 		return notice
 	})
+
+	// Disable logging inside the gobrake package to suppress remote config errors
+	gobrakeLogger := gobrake.GetLogger()
+	gobrakeLogger.SetFlags(0)
+	gobrakeLogger.SetOutput(ioutil.Discard)
 
 	hook := &airbrakeHook{
 		Airbrake:  airbrake,
